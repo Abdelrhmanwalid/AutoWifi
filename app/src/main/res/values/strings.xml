@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Auto Wifi</string>
+
+    <string name="wifi_option">Turn Wifi:</string>
+
+    <string name="select_time">Set Time</string>
+
+    <string name="start">Start</string>
+
+    <string-array name="wifi_options">
+        <item>On</item>
+        <item>Off</item>
+    </string-array>
+
+</resources>

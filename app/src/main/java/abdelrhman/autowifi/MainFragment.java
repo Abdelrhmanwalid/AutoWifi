@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import abdelrhman.autowifi.service.autowifiSerivce;
 
@@ -66,6 +67,17 @@ public class MainFragment extends Fragment {
             }
         });
 
+        // stop button
+        Button stopButton = (Button) rootView.findViewById(R.id.stop_button);
+        stopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent stopIntent = new Intent(getActivity(), broadcastReceiver.class);
+                stopIntent.putExtra("stop", true);
+                getActivity().sendBroadcast(stopIntent);
+            }
+        });
+
         // start button
         Button startButton = (Button) rootView.findViewById(R.id.start_button);
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +119,7 @@ public class MainFragment extends Fragment {
                 .setContentTitle(getString(R.string.app_name))
                 .setTicker(notificationString)
                 .setContentIntent(notificationPendingIntent)
-                .addAction(android.R.drawable.ic_menu_close_clear_cancel, "Cancel", stop())
+                .addAction(android.R.drawable.ic_menu_close_clear_cancel, "Stop", stop())
                 .setOngoing(true);
         Notification notification = nBuilder.build();
         notificationManager.notify(101, notification);
@@ -134,6 +146,8 @@ public class MainFragment extends Fragment {
                 NotificationManager notificationManager = (NotificationManager)
                         context.getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.cancel(101);
+                Toast toast = Toast.makeText(context, "Stopped", Toast.LENGTH_SHORT);
+                toast.show();
             }
         }
     }

@@ -22,6 +22,7 @@
 
         <service android:name=".service.autowifiSerivce"/>
         <receiver android:name=".service.autowifiSerivce$alarmReceiver"/>
+        <receiver android:name=".MainFragment$broadcastReceiver"/>
     </application>
 
 </manifest>

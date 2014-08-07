@@ -11,6 +11,7 @@ import android.util.Log;
 public class autowifiSerivce extends IntentService {
     private static final String LOG_TAG = autowifiSerivce.class.getSimpleName();
     public static final String SELECTED_OPTION = "so";
+
     public autowifiSerivce() {
         super("autowifiSerivce");
     }
@@ -26,7 +27,7 @@ public class autowifiSerivce extends IntentService {
         wifiManager.setWifiEnabled(enable);
     }
 
-    public static class alarmReceiver extends BroadcastReceiver{
+    public static class alarmReceiver extends BroadcastReceiver {
         private static final String LOG_TAG = alarmReceiver.class.getSimpleName();
         @Override
         public void onReceive(Context context, Intent intent) {

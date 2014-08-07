@@ -49,10 +49,12 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         timeDifference = picked.getTime() - current.getTime();
         int seconed = calendar.get(Calendar.SECOND);
         pickedTime = String.format("%d:%d:%d", hour, minute, seconed);
+        String toastString =
+                (timeDifference / (1000 * 60)) == 1 ? " minute" : " minutes";
         Toast toast = Toast.makeText(getActivity(),
-                Long.toString(timeDifference / (1000 * 60)) + " minutes",Toast.LENGTH_SHORT);
+                Long.toString(timeDifference / (1000 * 60)) + toastString,Toast.LENGTH_SHORT);
         toast.show();
-        Log.v(LOG_TAG,Long.toString(timeDifference / (1000 * 60)) + " minutes");
+        Log.v(LOG_TAG,Long.toString(timeDifference / (1000 * 60)) + " minutes - " + pickedTime);
     }
 
 

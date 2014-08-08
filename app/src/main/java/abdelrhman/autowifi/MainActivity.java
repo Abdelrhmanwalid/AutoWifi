@@ -39,6 +39,9 @@ public class MainActivity extends ActionBarActivity {
             Uri link = Uri.parse("https://github.com/Abdelrhmanwalid/AutoWifi");
             Intent intent = new Intent(Intent.ACTION_VIEW, link);
             startActivity(intent);
+        } if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

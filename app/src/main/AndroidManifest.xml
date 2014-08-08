@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="abdelrhman.autowifi" >
 
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -20,9 +20,18 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.autowifiSerivce"/>
-        <receiver android:name=".service.autowifiSerivce$alarmReceiver"/>
-        <receiver android:name=".MainFragment$broadcastReceiver"/>
+        <service android:name=".service.autowifiSerivce" />
+
+        <receiver android:name=".service.autowifiSerivce$alarmReceiver" />
+        <receiver android:name=".MainFragment$broadcastReceiver" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="abdelrhman.autowifi.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -7,7 +7,9 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,6 +31,8 @@ public class MainFragment extends Fragment {
     private String selectedOption = "On"; // default value
     private static PendingIntent pendingIntent;
     private static Intent intent;
+    private SharedPreferences sharedPreferences;
+    boolean notification;
 
     public MainFragment() {
     }
@@ -77,6 +81,7 @@ public class MainFragment extends Fragment {
                 getActivity().sendBroadcast(stopIntent);
             }
         });
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         // start button
         Button startButton = (Button) rootView.findViewById(R.id.start_button);
@@ -95,10 +100,21 @@ public class MainFragment extends Fragment {
                 AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
                 pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + timeDifference, pendingIntent);
-                Notification();
+                if (notification) {
+                    Notification();
+                } else {
+                    Toast toast = Toast.makeText(getActivity(), "Started", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        notification = sharedPreferences.getBoolean(getString(R.string.pref_notification_key), false);
+        super.onResume();
     }
 
     private void Notification() {
